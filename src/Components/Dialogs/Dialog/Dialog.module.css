@@ -1,0 +1,15 @@
+.wrapper{
+width: 550px;
+height: 70px;
+background-color: #dce0e3;
+}
+.avatar{
+    width:32px;
+    height: 32px;
+}
+.name{
+    padding-left: 10px;
+}
+.short{
+    padding: 0px 5px;
+}

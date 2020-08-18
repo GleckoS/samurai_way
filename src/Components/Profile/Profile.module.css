@@ -1,0 +1,10 @@
+container{
+    grid-column: 4/7;
+    padding-left: 0px;
+}
+
+.container{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
