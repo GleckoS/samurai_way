@@ -1,0 +1,14 @@
+.img img{
+    max-width: 32px;
+    border-radius: 50%;
+}
+.wrap{
+    list-style: none;
+    padding-top: 10px;
+}
+span{
+    padding: 4px 10px;
+}
+.text{
+    text-align: left;
+}

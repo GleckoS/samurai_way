@@ -1,0 +1,15 @@
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.img img{
+    max-width: 32px;
+    border-radius: 50%;
+    transition:transform .8s ease-in-out;
+}
+.img img:hover{
+    transform: rotate(360deg);
+}
+.inf{
+    padding: 5px 10px;
+}

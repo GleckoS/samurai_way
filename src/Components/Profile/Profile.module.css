@@ -1,10 +1,50 @@
-container{
+
+.main {
     grid-column: 4/7;
     padding-left: 0px;
 }
 
-.container{
+.container {
     max-width: 960px;
     margin: 0 auto;
     padding: 0 15px;
+}
+
+.wrapper ul {
+    padding-left: 0px;
+}
+
+.li {
+    padding: 0px 0px 30px;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.img img {
+    max-height: 180px;
+    Margin: 10px;
+}
+
+.name {
+    padding: 10px 20px 25px 20px;
+    font-size: 24px;
+}
+
+.inf {
+    text-align: right;
+}
+.submittWrapper{
+padding-top: 30px;
+}
+.textArea{
+    width: 450px;
+    margin-left: 10px;
+}
+
+.btn{
+    margin-left: 385px;
+    padding: 10px 20px;
 }

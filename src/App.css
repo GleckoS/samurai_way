@@ -38,3 +38,6 @@ Dialogs{
     grid-area: main;
 
 }
+Messages{
+    grid-area: main;
+}

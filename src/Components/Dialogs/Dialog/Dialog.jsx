@@ -6,8 +6,8 @@ function Dialog(props){
         <div className={D.wrapper}>
             <span className={D.img}>
                 <img className={D.avatar}
-                     src={props.avatarUrl}
-                     alt=""
+                     src={props.img}
+                     alt={props.id}
                 />
             </span>
             <span className={D.name}>
