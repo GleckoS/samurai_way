@@ -2,13 +2,18 @@ import React, {Component} from "react"
 import {addPost, OnPostChange, setCurrentProfile} from "../../redux/ProfileReducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 
 
 class ProfileAPIContainer extends Component{
 
     componentDidMount(props){
-        fetch(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        let userID = this.props.match.params.userID
+        
+        debugger
+        /*${this.props.match.params.userID ? this.props.match.params.userID : 2}*/
+        fetch(`https://social-network.samuraijs.com/api/1.0/profile/${userID ? userID : "2"}`)
             .then(res => res.json())
             .then(
                 (response) => {
@@ -35,7 +40,6 @@ let mapStateToProps = (state) => {
     }
 }
 
+let withUrlDataContainerComponentWithRouter = withRouter(ProfileAPIContainer)
 
-let ProfileContainer = connect(mapStateToProps, {OnPostChange, addPost, setCurrentProfile})(ProfileAPIContainer)
-
-export default ProfileContainer
+export default connect(mapStateToProps, {OnPostChange, addPost, setCurrentProfile})(withUrlDataContainerComponentWithRouter)
