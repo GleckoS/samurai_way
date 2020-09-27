@@ -11,6 +11,8 @@ import {
     unFollow
 } from "../../redux/UsersReducer";
 import Loading from "../Loading/Loading";
+import {UserAPI} from "../../API/API";
+
 
 
 class UsersAPIContainer extends Component {
@@ -18,11 +20,9 @@ class UsersAPIContainer extends Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleLoader(true)
-            fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesCount}`,
-                {credentials: 'include'})
-                .then(res => res.json())
+            UserAPI.getUsers({ currentPage: this.props.currentPage, pageSize: this.props.pageSize})
                 .then(
-                    (response) => {
+                    (response) => {debugger
                         this.props.setUsers(response.items)
                         this.props.setUsersTotalCount(response.totalCount)
                         this.props.toggleLoader(false)
@@ -36,10 +36,8 @@ class UsersAPIContainer extends Component {
         if(this.props.currentPage > 1) {
             this.props.setCurrentPageDOWN()
             this.props.toggleLoader(true)
-            let localCurrentPageDOWN = this.props.currentPage - 1
-            fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${localCurrentPageDOWN}&count=${this.props.pagesCount}`,
-                {credentials: 'include'})
-                .then(res => res.json())
+
+            UserAPI.getUsersDown({ currentPage: this.props.currentPage, pageSize: this.props.pageSize})
                 .then(
                     (response) => {
                         this.props.setUsers(response.items)
@@ -52,10 +50,8 @@ class UsersAPIContainer extends Component {
     onPageChangedUP = () => {
         this.props.setCurrentPageUP()
         this.props.toggleLoader(true)
-        let localCurrentPageUP = this.props.currentPage + 1
-        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${localCurrentPageUP}&count=${this.props.pagesCount}`,
-            {credentials: 'include'})
-            .then(res => res.json())
+
+        UserAPI.getUsersUp({currentPage: this.props.currentPage, pageSize: this.props.pageSize})
             .then(
                 (response) => {
                     this.props.setUsers(response.items)
@@ -81,7 +77,7 @@ class UsersAPIContainer extends Component {
 const mapStateToProps = (state) => {
     return {
         users: state.Users.users,
-        pagesCount: state.Users.pagesCount,
+        pageSize: state.Users.pageSize,
         totalUsersCount: state.Users.totalUsersCount,
         currentPage: state.Users.currentPage,
         isFetching: state.Users.isFetching
