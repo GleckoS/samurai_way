@@ -29,7 +29,6 @@ class HeaderAPIContainer extends Component {
 
 
 const mapStateToProps = (state) => {
-    debugger
     return {
         isAuth: state.Auth.isAuth,
         login: state.Auth.login

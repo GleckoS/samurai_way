@@ -26,19 +26,34 @@ const Users = (props) => {
                 <div className={U.UserWrapper} key={u.id}>
                     <div>
                         <div>
-                            <NavLink to={`/Profile/`+ u.id}>{u.img
+                            <NavLink to={`/Profile/` + u.id}>{u.img
                                 ? <img alt="personal" className={U.PersonImg} src={u.img}/>
                                 : <img alt="default" className={U.PersonImg}
                                        src="https://blachymaxsystem.pl/wp-content/uploads/2019/01/unknown-user.png"/>}
                             </NavLink>
                         </div>
-                        <div>{u.followed
-                            ? <button className={U.UsersBTN} onClick={() => {
-                                props.Follow(u.id)
-                            }}>Follow</button>
-                            : <button className={U.UsersBTN} onClick={() => {
-                                props.Follow(u.id)
-                            }}>UnFollow</button>}
+                        <div>
+                            <button className={U.UsersBTN} onClick={() => {
+
+                                fetch(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                    {
+                                        method: `${u.followed ? "DELETE" : "POST"}`,
+                                        credentials: 'include',
+                                        headers: {
+                                            'API-KEY': "fd396d83-5a31-4c7e-8a35-0246e4cf2a0a"
+                                        }
+                                    })
+                                    .then(res => res.json())
+                                    .then(
+                                        (response) => {
+
+                                            if (response.resultCode === 0) {
+                                                props.Follow(u.id)
+                                            }
+                                        }
+                                    )
+                            }}>{u.followed ? "UnFollow" : "Follow"}
+                            </button>
                         </div>
                     </div>
                     <div className={U.PersonName}>

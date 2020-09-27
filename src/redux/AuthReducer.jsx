@@ -16,7 +16,6 @@ const AuthReducer = (state = initialUsersState, action) => {
             return {...state, isFetching: action.isFetching}
         }
         case SET_AUTH_USER_DATA: {
-            debugger
             return {
                 ...state,
                 ...action.data,

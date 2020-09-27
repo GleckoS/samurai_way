@@ -3,7 +3,7 @@ import M from "./Music.module.css"
 
 function Music(){
     return(
-        <div>dawda</div>
+        <section>dawda</section>
     )
 }
 

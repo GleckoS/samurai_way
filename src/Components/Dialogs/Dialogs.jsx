@@ -14,7 +14,7 @@ function Dialogs(props) {
         name={dialog.name} id={dialog.id} img={dialog.img} text={dialog.text}/></NavLink></li>)
 
     return (
-        <container className={D.main}>
+        <section className={D.main}>
             <div className={D.container}>
                 <div className={D.wrapper}>
                     <ul>
@@ -22,7 +22,7 @@ function Dialogs(props) {
                     </ul>
                 </div>
             </div>
-        </container>
+        </section>
     )
 }
 

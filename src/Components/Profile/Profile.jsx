@@ -27,7 +27,7 @@ let Profile = (props) => {
     } else {
 
         return (
-            <container className={P.main}>
+            <section className={P.main}>
                 <div className={P.container}>
                     <div className={P.wrapper}>
                         <div className={P.profile}>
@@ -95,7 +95,7 @@ let Profile = (props) => {
                         </div>
                     </div>
                 </div>
-            </container>
+            </section>
         )
     }
 }

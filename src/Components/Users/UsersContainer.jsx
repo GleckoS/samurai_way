@@ -18,7 +18,8 @@ class UsersAPIContainer extends Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleLoader(true)
-            fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesCount}`)
+            fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesCount}`,
+                {credentials: 'include'})
                 .then(res => res.json())
                 .then(
                     (response) => {
@@ -34,7 +35,8 @@ class UsersAPIContainer extends Component {
     onPageChangedDOWN = (curPage) => {
         this.props.setCurrentPageDOWN(curPage)
         this.props.toggleLoader(true)
-        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${curPage}&count=${this.props.pagesCount}`)
+        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.}&count=${this.props.pagesCount}`,
+            {credentials: 'include'})
             .then(res => res.json())
             .then(
                 (response) => {
@@ -47,7 +49,8 @@ class UsersAPIContainer extends Component {
     onPageChangedUP = (curPage) => {
         this.props.setCurrentPageUP(curPage)
         this.props.toggleLoader(true)
-        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${curPage}&count=${this.props.pagesCount}`)
+        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.}&count=${this.props.pagesCount}`,
+            {credentials: 'include'})
             .then(res => res.json())
             .then(
                 (response) => {
@@ -56,7 +59,6 @@ class UsersAPIContainer extends Component {
                 }
             )
     }
-
     render() {
         return <>
             {this.props.isFetching ? <Loading/> : <Users

@@ -12,7 +12,6 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 import MessagesContainer from "./Components/Dialogs/Messages/MessagesContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import AuthContainer from "./Components/Header/AuthContainer";
-import Header from "./Components/Header/Header";
 
 
 function App(props) {

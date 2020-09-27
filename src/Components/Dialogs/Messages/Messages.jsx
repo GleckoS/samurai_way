@@ -20,7 +20,7 @@ const Messages = (props) => {
     }
 
     return (
-        <container className={M.main}>
+        <section className={M.main}>
             <div className={M.wrapper}>
 
                 <div className={M.messages}>
@@ -44,7 +44,7 @@ const Messages = (props) => {
                     </div>
                 </div>
             </div>
-        </container>
+        </section>
     )
 }
 

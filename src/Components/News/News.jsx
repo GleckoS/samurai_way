@@ -3,7 +3,7 @@ import N from "./News.module.css"
 
 function News(){
     return(
-        <div>dadwda</div>
+        <section>dadwda</section>
     )
 }
 
