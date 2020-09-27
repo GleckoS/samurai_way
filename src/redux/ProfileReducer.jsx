@@ -1,12 +1,13 @@
 const ADD_POST = `ADD-POST`
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
+const SET_CURRENT_PROFILE = `SET_CURRENT_PROFILE`
 
 let initialProfileState = {
     Posts: [
         {
             id: 1,
             emoji: "https://icons.iconarchive.com/icons/designbolts/emoji/256/Emoji-Blushing-icon.png",
-            text: "Уже неделю учу React-Redax"
+            text: "Уже месяц учу React-Redux"
         },
         {
             id: 2,
@@ -14,47 +15,48 @@ let initialProfileState = {
             text: "Мой Первый пост :D"
         }
     ],
-    NewPostText: "Default"
+    NewPostText: "Default",
+    profileInfo: null
+
 }
 
 const ProfileReducer = (state = initialProfileState, action) => {
-
-    let stateCopy = {
-        ...state,
-        Posts: [...state.Posts]
-    }
-
-
     switch (action.type) {
-        case ADD_POST:
+
+        case ADD_POST: {
             let newPost = {
+                id: 1,
                 text: state.NewPostText,
                 emoji: "https://icons.iconarchive.com/icons/designbolts/emoji/256/Emoji-Blushing-icon.png"
             }
+            return {
+                ...state,
+                Posts: [...state.Posts, newPost],
+                NewPostText: ""
+            }
+        }
 
-            stateCopy.Posts.push(newPost)
-            stateCopy.NewPostText = ""
-            return stateCopy
+        case UPDATE_NEW_POST_TEXT: {
+            debugger
+            return {
+                ...state,
+                NewPostText: action.newText
+            }
+        }
 
-        case UPDATE_NEW_POST_TEXT:
-            stateCopy.NewPostText = action.newText
-            return stateCopy
+        case SET_CURRENT_PROFILE: {
+            debugger
+            return {...state, profileInfo: action.profileInfo}
+        }
+        default: {
+            return state
+        }
 
-        default:
-            return stateCopy
     }
 }
 
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST
-    }
-}
-export const OnPostChangeActionCreator = (text) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    }
-}
+export const addPost = () => ({type: ADD_POST})
+export const OnPostChange = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const setCurrentProfile = (profileInfo) => ({type: SET_CURRENT_PROFILE, profileInfo})
 
 export default ProfileReducer

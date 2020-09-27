@@ -1,0 +1,32 @@
+.UserWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main {
+    grid-column: 4/7;
+    border-right: 1px solid #224b7a;
+    border-left: 1px solid #224b7a;
+    padding: 2rem;
+}
+
+.PersonImg {
+    max-width: 128px;
+}
+
+.UsersBTN {
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.PersonName {
+    text-align: center;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.navigation {
+    padding-bottom: 30px;
+}

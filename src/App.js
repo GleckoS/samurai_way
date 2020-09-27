@@ -21,7 +21,7 @@ function App(props) {
                     img="https://previews.123rf.com/images/kritchanut/kritchanut1308/kritchanut130800013/21528486-male-avatar-profile-picture-vector.jpg"/>
             <NavBar Friends={props.Friends}/>
 
-            <Route exact path="/Profile" render={() => <ProfileContainer/>}/>
+            <Route path="/Profile" render={() => <ProfileContainer/>}/>
             <Route exact path="/Dialogs" render={() => <Dialogs DialogsData={props.DialogsData}/>}/>
 
             <Route exact path="/Dialogs/1" render={() => <MessagesContainer/>}/>

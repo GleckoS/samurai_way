@@ -1,28 +1,41 @@
-import React from "react"
-import {addPostActionCreator, OnPostChangeActionCreator} from "../../redux/ProfileReducer";
+import React, {Component} from "react"
+import {addPost, OnPostChange, setCurrentProfile} from "../../redux/ProfileReducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 
 
-let stateConnect = (state) => {
+
+class ProfileAPIContainer extends Component{
+
+    componentDidMount(props){
+        fetch(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then(res => res.json())
+            .then(
+                (response) => {
+                    this.props.setCurrentProfile(response)
+                }
+            )
+        debugger
+    }
+
+
+    render(){
+        return <Profile
+            {...this.props}
+
+        />
+    }
+}
+
+let mapStateToProps = (state) => {
     return{
         Posts: state.Profile.Posts,
-        NewPostText: state.Profile.NewPostText
-    }
-}
-let dispatchConnect = (dispatch) => {
-    return{
-        OnPostChange: (text) => {
-            dispatch(OnPostChangeActionCreator(text))
-        },
-        addPost: () => {
-            dispatch(addPostActionCreator())
-        }
+        NewPostText: state.Profile.NewPostText,
+        Profile: state.Profile.profileInfo
     }
 }
 
-let ProfileContainer = connect(stateConnect, dispatchConnect)(Profile)
+
+let ProfileContainer = connect(mapStateToProps, {OnPostChange, addPost, setCurrentProfile})(ProfileAPIContainer)
 
 export default ProfileContainer
-
-// Posts={props.state.Profile.Posts} NewPostText={props.state.Profile.NewPostText} dispatch={props.dispatch}
