@@ -5,14 +5,10 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
 
-
 class ProfileAPIContainer extends Component{
 
     componentDidMount(props){
         let userID = this.props.match.params.userID
-        
-        debugger
-        /*${this.props.match.params.userID ? this.props.match.params.userID : 2}*/
         fetch(`https://social-network.samuraijs.com/api/1.0/profile/${userID ? userID : "2"}`)
             .then(res => res.json())
             .then(
@@ -20,14 +16,12 @@ class ProfileAPIContainer extends Component{
                     this.props.setCurrentProfile(response)
                 }
             )
-        debugger
     }
 
 
     render(){
         return <Profile
             {...this.props}
-
         />
     }
 }

@@ -33,17 +33,6 @@ const UsersReducer = (state = initialUsersState, action) => {
             }
 
         }
-       /* case UN_FOLLOW: {
-            return {
-                ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userID) {
-                        return {...u, followed: false}
-                    }
-                    return u
-                })
-            }
-        }*/
         case SET_USERS: {
             return {...state, users: action.users}
         }

@@ -1,5 +1,6 @@
 import React from "react"
 import H from "./Header.module.css"
+import {NavLink} from "react-router-dom";
 
 function Header(props) {
     return (
@@ -15,12 +16,19 @@ function Header(props) {
                     <div className={H.music}>
                         <a href="#">Music</a>
                     </div>
-                    <div className={H.name}>
-                        {props.name}
-                    </div>
-                    <div className={H.img}>
-                        <img src={props.img}/>
-                    </div>
+                    {props.isAuth
+                        ? <div>
+                            <NavLink to={"/login"} className={H.login}>Login</NavLink>
+                        </div>
+                        :   <>
+                            <div className={H.name}>
+                                {props.login}
+                            </div>
+                            <div className={H.img}>
+                                <img src={props.img}/>
+                            </div>
+                            </>
+                        }
 
                 </div>
             </div>
