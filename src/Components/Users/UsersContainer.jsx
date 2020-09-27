@@ -32,24 +32,28 @@ class UsersAPIContainer extends Component {
     }
 
 
-    onPageChangedDOWN = (curPage) => {
-        this.props.setCurrentPageDOWN(curPage)
-        this.props.toggleLoader(true)
-        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.}&count=${this.props.pagesCount}`,
-            {credentials: 'include'})
-            .then(res => res.json())
-            .then(
-                (response) => {
-                    this.props.setUsers(response.items)
-                    this.props.toggleLoader(false)
+    onPageChangedDOWN = () => {
+        if(this.props.currentPage > 1) {
+            this.props.setCurrentPageDOWN()
+            this.props.toggleLoader(true)
+            let localCurrentPageDOWN = this.props.currentPage - 1
+            fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${localCurrentPageDOWN}&count=${this.props.pagesCount}`,
+                {credentials: 'include'})
+                .then(res => res.json())
+                .then(
+                    (response) => {
+                        this.props.setUsers(response.items)
+                        this.props.toggleLoader(false)
 
-                }
-            )
+                    }
+                )
+        }
     }
-    onPageChangedUP = (curPage) => {
-        this.props.setCurrentPageUP(curPage)
+    onPageChangedUP = () => {
+        this.props.setCurrentPageUP()
         this.props.toggleLoader(true)
-        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.}&count=${this.props.pagesCount}`,
+        let localCurrentPageUP = this.props.currentPage + 1
+        fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${localCurrentPageUP}&count=${this.props.pagesCount}`,
             {credentials: 'include'})
             .then(res => res.json())
             .then(

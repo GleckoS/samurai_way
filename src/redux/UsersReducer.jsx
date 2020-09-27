@@ -37,10 +37,10 @@ const UsersReducer = (state = initialUsersState, action) => {
             return {...state, users: action.users}
         }
         case SET_CURRENT_PAGE_UP: {
-            return {...state, currentPage: action.currentPage += 1}
+            return {...state, currentPage: state.currentPage += 1}
         }
         case SET_CURRENT_PAGE_DOWN: {
-            return {...state, currentPage: action.currentPage -= 1}
+            return {...state, currentPage: state.currentPage -= 1}
         }
         case SET_USERS_TOTAL_COUNT: {
             return {...state, totalUsersCount: action.totalUsersCount}
@@ -56,8 +56,8 @@ const UsersReducer = (state = initialUsersState, action) => {
 export const follow = (userID) => ({type: FOLLOW, userID})
 export const unFollow = (userID) => ({type: UN_FOLLOW, userID})
 export const setUsers = (users) => ({type: SET_USERS, users})
-export const setCurrentPageUP = (currentPage) => ({type: SET_CURRENT_PAGE_UP, currentPage})
-export const setCurrentPageDOWN = (currentPage) => ({type: SET_CURRENT_PAGE_DOWN, currentPage})
+export const setCurrentPageUP = () => ({type: SET_CURRENT_PAGE_UP})
+export const setCurrentPageDOWN = () => ({type: SET_CURRENT_PAGE_DOWN})
 export const setUsersTotalCount = (totalUsersCount) => ({type: SET_USERS_TOTAL_COUNT, totalUsersCount})
 export const toggleLoader = (isFetching) => ({type: TOGGLE_LOADER, isFetching})
 

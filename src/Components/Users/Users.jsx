@@ -3,20 +3,19 @@ import U from "./Users.module.css";
 import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
-    let curPage = props.currentPage
     return (
         <div className={U.main}>
             <div className={U.navigation}>
                     <span onClick={() => {
-                        props.onPageChangedDOWN(curPage)
+                        props.onPageChangedDOWN()
                     }}>
                         Prev
                     </span>
                 <span className={U.selectedPage}>
-                        {curPage}
+                        {props.currentPage}
                     </span>
                 <span onClick={() => {
-                    props.onPageChangedUP(curPage)
+                    props.onPageChangedUP()
                 }}>
                         Next
                     </span>
