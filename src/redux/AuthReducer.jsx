@@ -1,3 +1,5 @@
+import {UserAPI} from "../API/API";
+
 let TOGGLE_LOADER = `TOGGLE_LOADER`
 let SET_AUTH_USER_DATA = `SET_AUTH_USER_DATA`
 
@@ -19,7 +21,7 @@ const AuthReducer = (state = initialUsersState, action) => {
             return {
                 ...state,
                 ...action.data,
-                iaAuth: true
+                isAuth: true
             }
         }
         default:
@@ -30,5 +32,20 @@ const AuthReducer = (state = initialUsersState, action) => {
 export const toggleLoader = (isFetching) => ({type: TOGGLE_LOADER, isFetching})
 export const setAuthUserData = (id, email, login) => ({type: SET_AUTH_USER_DATA, data: {id, email, login}})
 
+
+export const loggingThunkCreator = () => {
+    return (dispatch) => {
+
+        UserAPI.Logining()
+            .then(
+                (response) => {
+                    if (response.resultCode === 0) {
+                        let {id, email, login} = response.data
+                        dispatch(setAuthUserData(id, email, login))
+                    }
+                }
+            )
+    }
+}
 
 export default AuthReducer

@@ -7,6 +7,7 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import Footer from "./Components/Footer/Footer";
+import Logging from "./Components/Logging/Logging";
 import {Route} from "react-router-dom";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import MessagesContainer from "./Components/Dialogs/Messages/MessagesContainer";
@@ -14,11 +15,13 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import AuthContainer from "./Components/Header/AuthContainer";
 
 
+
 function App(props) {
 
     return (
         <div className="AppWrapper">
-            <AuthContainer/>
+
+            <AuthContainer/> {/* -- Header*/}
             <NavBar Friends={props.Friends}/>
 
             <Route path="/Profile/:userID?" render={() => <ProfileContainer/>}/>
@@ -27,10 +30,13 @@ function App(props) {
             <Route exact path="/Dialogs/1" render={() => <MessagesContainer/>}/>
 
             <Route exact path="/Users" render={() => <UsersContainer/>}/>
+            <Route exact path="/login" render={() => <Logging/>}/>
             <Route exact path="/News" render={() => <News/>}/>
             <Route exact path="/Music" render={() => <Music/>}/>
             <Route exact path="/Settings" render={() => <Settings/>}/>
+
             <Footer/>
+
         </div>
     )
 }

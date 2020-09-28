@@ -3,6 +3,7 @@ import H from "./Header.module.css"
 import {NavLink} from "react-router-dom";
 
 function Header(props) {
+    debugger
     return (
         <header className={H.main}>
             <div className={H.container}>
@@ -17,19 +18,18 @@ function Header(props) {
                         <a href="#">Music</a>
                     </div>
                     {props.isAuth
-                        ? <div>
-                            <NavLink to={"/login"} className={H.login}>Login</NavLink>
-                        </div>
-                        :   <>
+                        ? <>
                             <div className={H.name}>
                                 {props.login}
                             </div>
                             <div className={H.img}>
                                 <img src={props.img}/>
                             </div>
-                            </>
+                        </>
+                        : <div>
+                        <NavLink to={"/login"} className={H.login}>Login</NavLink>
+                        </div>
                         }
-
                 </div>
             </div>
         </header>

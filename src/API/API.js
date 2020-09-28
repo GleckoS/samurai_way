@@ -27,8 +27,16 @@ export const UserAPI = {
                 }
             })
             .then(res => res.json())
+    },
+    getProfile(userID) {
+        return fetch(`https://social-network.samuraijs.com/api/1.0/profile/${userID ? userID : "2"}`)
+            .then(res => res.json())
+    },
+    Logining() {
+        return fetch(`https://social-network.samuraijs.com/api/1.0/auth/me`,
+            {credentials: 'include'})
+            .then(res => res.json())
     }
-
 }
 
 

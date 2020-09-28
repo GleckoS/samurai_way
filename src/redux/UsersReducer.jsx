@@ -78,7 +78,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
         dispatch(toggleLoader(true))
         UserAPI.getUsers({currentPage, pageSize})
             .then(
-                (response) => {debugger
+                (response) => {
                     dispatch(setUsers(response.items))
                     dispatch(setUsersTotalCount(response.totalCount))
                     dispatch(toggleLoader(false))

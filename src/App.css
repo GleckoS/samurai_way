@@ -41,6 +41,9 @@ Dialogs{
 Messages{
     grid-area: main;
 }
-Users{
+UsersContainer{
+    grid-area: main;
+}
+Logging{
     grid-area: main;
 }
