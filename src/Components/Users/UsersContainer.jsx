@@ -1,64 +1,27 @@
 import React, {Component} from "react";
 import Users from "./Users";
 import {connect} from "react-redux"
-import {
-    follow,
-    setCurrentPageDOWN,
-    setCurrentPageUP,
-    setUsers,
-    setUsersTotalCount, toggleFollowButton,
-    toggleLoader,
-    unFollow
-} from "../../redux/UsersReducer";
+import {getUsersDownThunkCreator, getUsersThunkCreator, getUsersUpThunkCreator, followUnFollowThunkCreator} from "../../redux/UsersReducer";
 import Loading from "../Loading/Loading";
-import {UserAPI} from "../../API/API";
-
-
 
 class UsersAPIContainer extends Component {
 
     componentDidMount() {
         if (this.props.users.length === 0) {
-            this.props.toggleLoader(true)
-            UserAPI.getUsers({ currentPage: this.props.currentPage, pageSize: this.props.pageSize})
-                .then(
-                    (response) => {debugger
-                        this.props.setUsers(response.items)
-                        this.props.setUsersTotalCount(response.totalCount)
-                        this.props.toggleLoader(false)
-                    }
-                )
+            this.props.getUsers(this.props.currentPage, this.props.pageSize)
         }
     }
 
+    onPageChangedUP = () => {
+        this.props.getUsersUp(this.props.currentPage, this.props.pageSize)
+    }
 
     onPageChangedDOWN = () => {
         if(this.props.currentPage > 1) {
-            this.props.setCurrentPageDOWN()
-            this.props.toggleLoader(true)
-
-            UserAPI.getUsersDown({ currentPage: this.props.currentPage, pageSize: this.props.pageSize})
-                .then(
-                    (response) => {
-                        this.props.setUsers(response.items)
-                        this.props.toggleLoader(false)
-
-                    }
-                )
+            this.props.getUsersDown(this.props.currentPage, this.props.pageSize)
         }
     }
-    onPageChangedUP = () => {
-        this.props.setCurrentPageUP()
-        this.props.toggleLoader(true)
 
-        UserAPI.getUsersUp({currentPage: this.props.currentPage, pageSize: this.props.pageSize})
-            .then(
-                (response) => {
-                    this.props.setUsers(response.items)
-                    this.props.toggleLoader(false)
-                }
-            )
-    }
     render() {
         return <>
             {this.props.isFetching ? <Loading/> : <Users
@@ -66,10 +29,8 @@ class UsersAPIContainer extends Component {
                 onPageChangedUP={this.onPageChangedUP}
                 users={this.props.users}
                 currentPage={this.props.currentPage}
-                unFollow={this.props.unFollow}
-                Follow={this.props.follow}
-                toggleFollowButton={this.props.toggleFollowButton}
                 FollowingInProgress={this.props.FollowingInProgress}
+                followUnFollow={this.props.followUnFollow}
             />}
         </>
     }
@@ -87,13 +48,9 @@ const mapStateToProps = (state) => {
 }
 
 let UsersContainer = connect(mapStateToProps, {
-    follow,
-    unFollow,
-    setUsers,
-    setCurrentPageDOWN,
-    setCurrentPageUP,
-    setUsersTotalCount,
-    toggleLoader,
-    toggleFollowButton
+    getUsers: getUsersThunkCreator,
+    getUsersUp: getUsersUpThunkCreator,
+    getUsersDown: getUsersDownThunkCreator,
+    followUnFollow: followUnFollowThunkCreator
 })(UsersAPIContainer)
 export default UsersContainer

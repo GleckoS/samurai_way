@@ -1,3 +1,5 @@
+import {UserAPI} from "../API/API";
+
 let FOLLOW = `FOLLOW`
 let UN_FOLLOW = `UN_FOLLOW`
 let SET_USERS = `SET_USERS`
@@ -70,5 +72,66 @@ export const setCurrentPageDOWN = () => ({type: SET_CURRENT_PAGE_DOWN})
 export const setUsersTotalCount = (totalUsersCount) => ({type: SET_USERS_TOTAL_COUNT, totalUsersCount})
 export const toggleLoader = (isFetching) => ({type: TOGGLE_LOADER, isFetching})
 export const toggleFollowButton = (isFetching, id) => ({type: FOLLOWING_IN_PROGRESS, isFetching, id})
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleLoader(true))
+        UserAPI.getUsers({currentPage, pageSize})
+            .then(
+                (response) => {debugger
+                    dispatch(setUsers(response.items))
+                    dispatch(setUsersTotalCount(response.totalCount))
+                    dispatch(toggleLoader(false))
+                }
+            )
+
+    }
+}
+export const getUsersUpThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setCurrentPageUP())
+        dispatch(toggleLoader(true))
+
+        UserAPI.getUsersUp({currentPage: currentPage, pageSize: pageSize})
+            .then(
+                (response) => {
+                    dispatch(setUsers(response.items))
+                    dispatch(toggleLoader(false))
+                }
+            )
+
+    }
+}
+export const getUsersDownThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setCurrentPageDOWN())
+        dispatch(toggleLoader(true))
+
+        UserAPI.getUsersDown({currentPage: currentPage, pageSize: pageSize})
+            .then(
+                (response) => {
+                    dispatch(setUsers(response.items))
+                    dispatch(toggleLoader(false))
+                }
+            )
+
+    }
+}
+
+export const followUnFollowThunkCreator = (id, followed) => {
+    return (dispatch) => {
+        dispatch(toggleFollowButton(true, id))
+        UserAPI.FollowUnFollow({followed: followed, id: id})
+            .then(
+                (response) => {
+                    if (response.resultCode === 0) {
+                        dispatch(follow(id))
+                    }
+                    dispatch(toggleFollowButton(false, id))
+                }
+            )
+    }
+}
+
 
 export default UsersReducer
