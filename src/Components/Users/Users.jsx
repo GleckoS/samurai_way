@@ -1,6 +1,8 @@
 import React from "react";
 import U from "./Users.module.css";
 import {NavLink} from "react-router-dom";
+import {toggleFollowButton} from "../../redux/UsersReducer";
+import {UserAPI} from "../../API/API";
 
 const Users = (props) => {
     return (
@@ -32,25 +34,19 @@ const Users = (props) => {
                             </NavLink>
                         </div>
                         <div>
-                            <button className={U.UsersBTN} onClick={() => {
+                            <button disabled={props.FollowingInProgress.some(id => id === u.id)} className={U.UsersBTN} onClick={() => {
+                                props.toggleFollowButton(true, u.id)
 
-                                fetch(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                    {
-                                        method: `${u.followed ? "DELETE" : "POST"}`,
-                                        credentials: 'include',
-                                        headers: {
-                                            'API-KEY': "fd396d83-5a31-4c7e-8a35-0246e4cf2a0a"
-                                        }
-                                    })
-                                    .then(res => res.json())
+                               UserAPI.FollowUnFollow({followed: u.followed, id: u.id})
                                     .then(
                                         (response) => {
-
                                             if (response.resultCode === 0) {
                                                 props.Follow(u.id)
                                             }
+                                            props.toggleFollowButton(false, u.id)
                                         }
                                     )
+
                             }}>{u.followed ? "UnFollow" : "Follow"}
                             </button>
                         </div>
