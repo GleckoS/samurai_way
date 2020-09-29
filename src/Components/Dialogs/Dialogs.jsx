@@ -1,6 +1,6 @@
 import React from "react"
 import D from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import Dialog from "./Dialog/Dialog";
 
 
@@ -9,6 +9,8 @@ import Dialog from "./Dialog/Dialog";
 
 
 function Dialogs(props) {
+
+    if(props.isAuth === false) return <Redirect to={"/login"}/>
 
     let DialogsElements = props.DialogsData.map(dialog => <li className={D.li}><NavLink to={"Dialogs/" + [dialog.id]}><Dialog
         name={dialog.name} id={dialog.id} img={dialog.img} text={dialog.text}/></NavLink></li>)

@@ -3,8 +3,8 @@ import {UserAPI} from "../API/API";
 let TOGGLE_LOADER = `TOGGLE_LOADER`
 let SET_AUTH_USER_DATA = `SET_AUTH_USER_DATA`
 
-let initialUsersState;
-initialUsersState = {
+let initialAuthState;
+initialAuthState = {
     id: null,
     email: null,
     login: null,
@@ -12,7 +12,7 @@ initialUsersState = {
 };
 
 
-const AuthReducer = (state = initialUsersState, action) => {
+const AuthReducer = (state = initialAuthState, action) => {
     switch (action.type) {
         case TOGGLE_LOADER: {
             return {...state, isFetching: action.isFetching}
