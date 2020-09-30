@@ -9,6 +9,7 @@ import {
 } from "../../redux/UsersReducer";
 import Loading from "../Loading/Loading";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersAPIContainer extends Component {
 
@@ -45,8 +46,6 @@ class UsersAPIContainer extends Component {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(UsersAPIContainer)
-
 
 const mapStateToProps = (state) => {
     return {
@@ -59,11 +58,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-let UsersContainer = connect(mapStateToProps, {
-    getUsers: getUsersThunkCreator,
-    getUsersUp: getUsersUpThunkCreator,
-    getUsersDown: getUsersDownThunkCreator,
-    followUnFollow: followUnFollowThunkCreator
-})(AuthRedirectComponent)
 
-export default UsersContainer
+export default compose(
+    connect(mapStateToProps, {
+        getUsers: getUsersThunkCreator,
+        getUsersUp: getUsersUpThunkCreator,
+        getUsersDown: getUsersDownThunkCreator,
+        followUnFollow: followUnFollowThunkCreator}),
+    withAuthRedirect
+)(UsersAPIContainer)
