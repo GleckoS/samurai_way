@@ -2,6 +2,7 @@ import React from "react"
 import P from "./Profile.module.css"
 import Post from "./Post/Post";
 import Loading from "../Loading/Loading";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 
 let Profile = (props) => {
@@ -40,9 +41,7 @@ let Profile = (props) => {
                                     {props.Profile.fullName}
                                 </div>
                                 <div className={P.inf}>
-                                    <div>
-                                        {props.Profile.aboutMe}
-                                    </div>
+                                    <ProfileStatus aboutMe={props.Profile.aboutMe}/>
                                     <div>
                                         Ищу работу: {props.Profile.lookingForAJob ? "Yes" : "No"}
                                     </div>

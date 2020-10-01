@@ -1,8 +1,8 @@
 import React, {Component} from "react"
-import {profileThunkCreator} from "../../redux/ProfileReducer";
+import {addPost, OnPostChange, profileThunkCreator} from "../../redux/ProfileReducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {Redirect, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
@@ -16,13 +16,9 @@ class ProfileAPIContainer extends Component{
 
 
     render(){
-        if(!this.props.isAuth){
-            return <Redirect to={"/login"}/>
-        } else {
             return <Profile
                 {...this.props}
             />
-        }
     }
 }
 
@@ -35,7 +31,7 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, {profileThunkCreator}),
+    connect(mapStateToProps, {profileThunkCreator, OnPostChange, addPost}),
     withRouter,
     withAuthRedirect
 )(ProfileAPIContainer)

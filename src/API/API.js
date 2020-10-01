@@ -29,6 +29,7 @@ export const UserAPI = {
             .then(res => res.json())
     },
     getProfile(userID) {
+        /*My id 11699*/
         return fetch(`https://social-network.samuraijs.com/api/1.0/profile/${userID ? userID : "2"}`)
             .then(res => res.json())
     },
