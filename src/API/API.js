@@ -38,6 +38,7 @@ export const UserAPI = {
             {credentials: 'include'})
             .then(res => res.json())
     }
+
 }
 
 
