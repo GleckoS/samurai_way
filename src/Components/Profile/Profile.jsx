@@ -26,7 +26,6 @@ let Profile = (props) => {
     if(!props.Profile){
         return <Loading/>
     } else {
-
         return (
             <section className={P.main}>
                 <div className={P.container}>
@@ -40,8 +39,13 @@ let Profile = (props) => {
                                 <div className={P.name}>
                                     {props.Profile.fullName}
                                 </div>
+                                <div>
+                                    <ProfileStatus profileStatus={props.ProfileStatus} updateProfileStatusThunkCreator={props.updateProfileStatusThunkCreator}/>
+                                </div>
                                 <div className={P.inf}>
-                                    <ProfileStatus aboutMe={props.Profile.aboutMe}/>
+                                    <div>
+                                        {props.Profile.aboutMe}
+                                    </div>
                                     <div>
                                         Ищу работу: {props.Profile.lookingForAJob ? "Yes" : "No"}
                                     </div>

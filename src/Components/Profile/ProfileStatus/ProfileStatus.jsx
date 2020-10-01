@@ -2,7 +2,8 @@ import React, {Component} from "react";
 
 export default class ProfileStatus extends Component {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.profileStatus
     }
     activateEditMode = () => {
         this.setState({
@@ -11,7 +12,13 @@ export default class ProfileStatus extends Component {
     }
     disableEditMode = () => {
         this.setState({
-            editMode:false
+            editMode:false,
+        })
+        this.props.updateProfileStatusThunkCreator(this.state.status)
+    }
+    onStatusChange = (e) => {
+        this.setState({
+            status: e.currentTarget.value
         })
     }
 
@@ -19,10 +26,10 @@ export default class ProfileStatus extends Component {
         return (
             <div>{this.state.editMode
                 ? <div>
-                    <input autoFocus={true} onBlur={this.disableEditMode} value={this.props.aboutMe}/>
+                    <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.disableEditMode} value={this.state.status}/>
                 </div>
                 : <div>
-                    <span onClick={this.activateEditMode}>{this.props.aboutMe}</span>
+                    <span onClick={this.activateEditMode}>{this.props.profileStatus ? this.props.profileStatus : "Введите статус"}</span>
                 </div>
             }
             </div>

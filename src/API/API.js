@@ -30,7 +30,19 @@ export const UserAPI = {
     },
     getProfile(userID) {
         /*My id 11699*/
-        return fetch(`https://social-network.samuraijs.com/api/1.0/profile/${userID ? userID : "2"}`)
+        return fetch(`https://social-network.samuraijs.com/api/1.0/profile/${userID ? userID : "11699"}`)
+            .then(res => res.json())
+    },
+    getProfileStatus(userID){
+      return fetch(`https://social-network.samuraijs.com/api/1.0/profile/status/${userID ? userID : "11699"}`)
+          .then(res => res.json())
+    },
+    UpdateProfileStatus(status){
+        return fetch(`https://social-network.samuraijs.com/api/1.0/profile/status`,
+        {
+            method: `PUT`,
+            body: JSON.stringify(status)
+        })
             .then(res => res.json())
     },
     Logining() {
