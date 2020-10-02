@@ -21,6 +21,15 @@ export default class ProfileStatus extends Component {
             status: e.currentTarget.value
         })
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.status !== this.state.status){
+            debugger
+            this.setState({
+                status: this.state.status /*this.props.status заменить когда разберусь с PUT*/
+
+            })
+        }
+    }
 
     render() {
         return (
@@ -29,7 +38,7 @@ export default class ProfileStatus extends Component {
                     <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.disableEditMode} value={this.state.status}/>
                 </div>
                 : <div>
-                    <span onClick={this.activateEditMode}>{this.props.profileStatus ? this.props.profileStatus : "Введите статус"}</span>
+                    <span onClick={this.activateEditMode}>{this.state.status ? this.state.status : "Введите статус"}</span>
                 </div>
             }
             </div>
