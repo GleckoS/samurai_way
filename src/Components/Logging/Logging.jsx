@@ -2,33 +2,36 @@ import React from "react";
 
 import {Field, Form} from 'react-final-form'
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const onSubmit = async values => {
+    await sleep(300)
+    window.alert(JSON.stringify(values, 0, 2))
+}
 
 const MyForm = () => (
     <Form
+        onSubmit={onSubmit}
         initialValues={{
-            /*firstName: ''*/
-        }}
-        onSubmit={values => {
-            // send values to the cloud
-
+            login: "",
+            password: "",
+            select: false
         }}
         validate={values => {
-            // do validation here, and return errors object
 
         }}
-        handleSubmit = {() => {}}
-        render={({handleSubmit, pristine, form, submitting}) => (
-            <form onSubmit={handleSubmit}>
-                <h2>Simple Default Input</h2>
+        render={({handleSubmit, form, submitting, pristine, values}) => (
+            <form id="myForm" onSubmit={handleSubmit}>
+                <h2>Вернуться сюда после освоение DOM</h2>
 
                 <div>
                     <label>Login</label>
-                    <Field name="firstName" component="input" placeholder="First Name"/>
+                    <Field name="login" component="input" placeholder=""/>
                 </div>
 
                 <div>
                     <label>Password</label>
-                    <Field name="password" component="input" placeholder="Password"/>
+                    <Field name="password" component="input" placeholder=""/>
                 </div>
 
                 <div>
@@ -36,11 +39,15 @@ const MyForm = () => (
                     <Field name="select" component="input" type="checkbox"/>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button onClick={() => {
+                    document.getElementById('myForm')
+                        .dispatchEvent(new Event('submit', { cancelable: true })) // ✅
+                }} type="submit">Submit</button>
             </form>
         )}
     />
 
 )
 
+/* Вернуться сюда после освоение DOM*/
 export default MyForm
