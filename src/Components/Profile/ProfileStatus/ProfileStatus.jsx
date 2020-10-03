@@ -23,7 +23,6 @@ export default class ProfileStatus extends Component {
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevState.status !== this.state.status){
-            debugger
             this.setState({
                 status: this.state.status /*this.props.status заменить когда разберусь с PUT*/
 
