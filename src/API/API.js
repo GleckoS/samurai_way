@@ -41,8 +41,10 @@ export const UserAPI = {
         return fetch(`https://social-network.samuraijs.com/api/1.0/profile/status`,
         {
             method: `PUT`,
+            credentials: 'include',
             body: JSON.stringify({status: status}),
             headers: {
+                'Content-Type': 'application/json',
                 'API-KEY': "fd396d83-5a31-4c7e-8a35-0246e4cf2a0a"
             }
         })
