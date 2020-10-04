@@ -65,7 +65,6 @@ const UsersReducer = (state = initialUsersState, action) => {
 }
 
 export const follow = (userID) => ({type: FOLLOW, userID})
-export const unFollow = (userID) => ({type: UN_FOLLOW, userID})
 export const setUsers = (users) => ({type: SET_USERS, users})
 export const setCurrentPageUP = () => ({type: SET_CURRENT_PAGE_UP})
 export const setCurrentPageDOWN = () => ({type: SET_CURRENT_PAGE_DOWN})

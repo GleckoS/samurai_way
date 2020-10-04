@@ -54,6 +54,19 @@ export const UserAPI = {
         return fetch(`https://social-network.samuraijs.com/api/1.0/auth/me`,
             {credentials: 'include'})
             .then(res => res.json())
+    },
+    LoggingForm(values) {
+        return fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`,
+            {
+                credentials: 'include',
+                method: `POST`,
+                body: JSON.stringify({values: values}),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'API-KEY': "fd396d83-5a31-4c7e-8a35-0246e4cf2a0a"
+                }
+            })
+            .then(res => res.json())
     }
 
 }
