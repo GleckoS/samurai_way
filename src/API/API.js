@@ -42,9 +42,7 @@ export const UserAPI = {
         {
             method: `PUT`,
             body: JSON.stringify({status: status}),
-            credentials: 'include',
             headers: {
-                'Content-Type': 'application/json',
                 'API-KEY': "fd396d83-5a31-4c7e-8a35-0246e4cf2a0a"
             }
         })
