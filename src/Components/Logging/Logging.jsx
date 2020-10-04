@@ -2,36 +2,33 @@ import React from "react";
 
 import {Field, Form} from 'react-final-form'
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-const onSubmit = async values => {
-    await sleep(300)
-    window.alert(JSON.stringify(values, 0, 2))
-}
 
 const MyForm = () => (
     <Form
-        onSubmit={onSubmit}
         initialValues={{
-            login: "",
-            password: "",
-            select: false
+            /*firstName: ''*/
         }}
-        validate={values => {
+        onSubmit={values => {
+            // send values to the cloud
 
         }}
-        render={({handleSubmit, form, submitting, pristine, values}) => (
-            <form id="myForm" onSubmit={handleSubmit}>
-                <h2>Вернуться сюда после освоение DOM</h2>
+        validate={values => {
+            // do validation here, and return errors object
+
+        }}
+        handleSubmit = {() => {}}
+        render={({handleSubmit, pristine, form, submitting}) => (
+            <form onSubmit={handleSubmit}>
+                <h2>Simple Default Input</h2>
 
                 <div>
                     <label>Login</label>
-                    <Field name="login" component="input" placeholder=""/>
+                    <Field name="firstName" component="input" placeholder="First Name"/>
                 </div>
 
                 <div>
                     <label>Password</label>
-                    <Field name="password" component="input" placeholder=""/>
+                    <Field name="password" component="input" placeholder="Password"/>
                 </div>
 
                 <div>
@@ -39,15 +36,11 @@ const MyForm = () => (
                     <Field name="select" component="input" type="checkbox"/>
                 </div>
 
-                <button onClick={() => {
-                    document.getElementById('myForm')
-                        .dispatchEvent(new Event('submit', { cancelable: true })) // ✅
-                }} type="submit">Submit</button>
+                <button type="submit">Submit</button>
             </form>
         )}
     />
 
 )
 
-/* Вернуться сюда после освоение DOM*/
 export default MyForm
