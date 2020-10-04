@@ -8,7 +8,7 @@ function Header(props) {
             <div className={H.container}>
                 <div className={H.wrapper}>
                     <div className={H.search}>
-                        <input type="text" placeholder="Search:"/>
+                        <input className={H.input} type="text" placeholder="Search:"/>
                     </div>
                     <div className={H.alert}>
                         <a href="#">Alerts</a>

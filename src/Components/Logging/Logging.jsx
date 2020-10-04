@@ -1,16 +1,43 @@
 import React from "react";
+import {Field, reduxForm} from "redux-form";
 
-let Logging = () => {
+const LoggingForm = (props) => {
     return (
-        <div>
+
+        <form onSubmit={props.handleSubmit}>
             <div>
-                Тут будет страница Логина :)
+                <Field name="email" component="input" placeholder="email"/>
             </div>
             <div>
-                https://social-network.samuraijs.com/signUp Здесь можно зарегистрироваться через куки :)
+                <Field name="password" component="input" placeholder="password"/>
             </div>
-        </div>
+            <div>
+                <span>Remember Me</span><Field name="rememberMe" component="input" type="checkbox"/>
+            </div>
+            <div>
+                <button> Login</button>
+            </div>
+        </form>
+
     )
 }
 
+
+const ReduxLoggingForm = reduxForm({form: "contact"})(LoggingForm)
+
+
+const Logging = () => {
+
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
+
+    return (
+        <div>
+            <h1>LOGIN</h1>
+            <ReduxLoggingForm onSubmit={onSubmit}/>
+        </div>
+    )
+
+}
 export default Logging

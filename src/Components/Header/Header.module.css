@@ -20,7 +20,7 @@
     border-radius: 50%;
 
 }
-input{
+.input{
     background-color: #224b7a;
     border-radius: 12px;
     height: 28px;
@@ -28,15 +28,15 @@ input{
     color:#fff;
     border: none;
 }
-input::placeholder {
+.input::placeholder {
     color: #8fa3b2;
     opacity: 1;
 }
-input:focus{
+.input:focus{
     background-color: #fff;
     color: black;
 }
-input[type=text]{;
+.input[type=text]{;
     padding-left: 24px;
     padding-right: 24px;
 }
