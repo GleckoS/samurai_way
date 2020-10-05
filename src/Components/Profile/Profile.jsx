@@ -3,23 +3,19 @@ import P from "./Profile.module.css"
 import Post from "./Post/Post";
 import Loading from "../Loading/Loading";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {TextArea} from "../../commonComponents/TextArea";
 
 
 let Profile = (props) => {
-
-    let newPostElement = React.createRef()
-
     let PostsCreator = props.Posts.map(post =>
         <li className={P.li}>
-            <Post id={post.id} img={post.emoji} text={post.text}/>
+            <Post id={post.id} text={post.text}/>
         </li>)
 
-    let OnPostChange = () => {
-        let text = newPostElement.current.value
-        props.OnPostChange(text)
-    }
-    let onAddPost = () => {
-        props.addPost()
+    let AddPost = (values) => {
+        props.addPost(values.newPostElement)
     }
     let defaultUserImg = "https://blachymaxsystem.pl/wp-content/uploads/2019/01/unknown-user.png"
 
@@ -78,23 +74,13 @@ let Profile = (props) => {
                             </div>
                         </div>
                         <div className={P.submittWrapper}>
-                            <div className={P.submit}>
-                                <div>
-                                <textarea ref={newPostElement} onChange={OnPostChange}
-                                          value={props.NewPostText}
-                                          className={P.textArea} rows="3"/>
-                                </div>
-                                <div>
-                                    <button onClick={onAddPost} type="submit" className={P.btn}>
-                                        Post!
-                                    </button>
-                                </div>
-                            </div>
+
                             <div className={P.posts}>
                                 <ul>
                                     {PostsCreator}
                                 </ul>
                             </div>
+                            <AddPostFormRedux  onSubmit={AddPost}/>
                         </div>
                     </div>
                 </div>
@@ -102,5 +88,33 @@ let Profile = (props) => {
         )
     }
 }
+
+
+
+const maxLength50 = maxLengthCreator(50)
+
+
+
+const AddPostForm = (props) => {
+    return (
+        <form  onSubmit={props.handleSubmit} className={P.submit}>
+            <div>
+                <Field component={TextArea}
+                          name="newPostElement"
+                          className={P.textArea}
+                       placeholder="Enter post:"
+                         validate={[ required, maxLength50]}
+                />
+            </div>
+            <div>
+                <button>
+                    Post!
+                </button>
+            </div>
+        </form>
+    )
+}
+
+const AddPostFormRedux = reduxForm({form: "ProfileAddPostForm"})(AddPostForm)
 
 export default Profile

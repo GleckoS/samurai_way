@@ -1,18 +1,15 @@
-.main{
+.main {
     grid-column: 4/7;
-    padding-left: 0px;
-    border-right: 1px solid #224b7a;
-    border-left: 1px solid #224b7a;
+    padding-left: 0;
 }
-
 .container{
     max-width: 960px;
     margin: 0 auto;
     padding: 0 15px;
 }
 .wrapper ul{
-     padding-left: 0px;
+     padding-left: 0;
  }
 .li{
-padding: 0px 0px 30px;
+padding: 0 0 30px;
 }

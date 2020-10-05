@@ -1,7 +1,6 @@
 import {UserAPI} from "../API/API";
 
 const ADD_POST = `ADD-POST`
-const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
 const SET_CURRENT_PROFILE = `SET_CURRENT_PROFILE`
 const SET_CURRENT_PROFILE_STATUS = `SET_CURRENT_PROFILE_STATUS`
 const UPDATE_CURRENT_PROFILE_STATUS = `UPDATE_CURRENT_PROFILE_STATUS`
@@ -10,16 +9,13 @@ let initialProfileState = {
     Posts: [
         {
             id: 1,
-            emoji: "https://icons.iconarchive.com/icons/designbolts/emoji/256/Emoji-Blushing-icon.png",
             text: "Уже месяц учу React-Redux"
         },
         {
             id: 2,
-            emoji: "https://icons.iconarchive.com/icons/designbolts/emoji/256/Emoji-Rage-icon.png",
             text: "Мой Первый пост :D"
         }
     ],
-    NewPostText: "Default",
     profileInfo: null,
     profileStatus: null,
     message: null
@@ -31,21 +27,12 @@ const ProfileReducer = (state = initialProfileState, action) => {
 
         case ADD_POST: {
             let newPost = {
-                id: 1,
-                text: state.NewPostText,
-                emoji: "https://icons.iconarchive.com/icons/designbolts/emoji/256/Emoji-Blushing-icon.png"
+                id: 3,
+                text: action.value
             }
             return {
                 ...state,
                 Posts: [...state.Posts, newPost],
-                NewPostText: ""
-            }
-        }
-
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                NewPostText: action.newText
             }
         }
 
@@ -65,11 +52,9 @@ const ProfileReducer = (state = initialProfileState, action) => {
     }
 }
 
-export const addPost = () => ({type: ADD_POST})
-export const OnPostChange = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const addPost = (value) => ({type: ADD_POST, value})
 export const setCurrentProfile = (profileInfo) => ({type: SET_CURRENT_PROFILE, profileInfo})
 export const setCurrentProfileStatus = (profileStatus) => ({type: SET_CURRENT_PROFILE_STATUS, profileStatus})
-export const updateCurrentProfileStatus = (message) => ({type: UPDATE_CURRENT_PROFILE_STATUS, message})
 
 export const profileThunkCreator = (userID) => {
     return (dispatch) => {
@@ -92,12 +77,13 @@ export const profileStatusThunkCreator = (userID) => {
 
     }
 }
+
 export const updateProfileStatusThunkCreator = (status) => {
-    return () => {
+    return(dispatch) => {
         UserAPI.UpdateProfileStatus(status)
             .then(
-                (response) => {
-                    console.log(response)
+                () => {
+                    dispatch(setCurrentProfileStatus(status))
                 }
             )
     }

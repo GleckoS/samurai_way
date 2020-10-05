@@ -1,22 +1,18 @@
 import React from "react"
 import M from './Messages.module.css'
 import Message from "./Message/Message";
+import {Field, reduxForm} from "redux-form";
+import {required} from "../../../utils/validators/validators";
+import {TextArea} from "../../../commonComponents/TextArea";
 
 const Messages = (props) => {
-
-    let newMessageElement = React.createRef()
 
     let Messages = props.MessagesData.map(message =>
         <Message sender={message.sender} img={message.img} text={message.text}/>
     )
 
-    let OnMessageChange = () => {
-        let text = newMessageElement.current.value
-        props.OnMessageChange(text)
-    }
-    let AddMessage = () => {
-        props.AddMessage()
-
+    let AddMessage = (values) => {
+        props.AddMessage(values.newMessageElement)
     }
 
     return (
@@ -28,24 +24,36 @@ const Messages = (props) => {
                         {Messages}
                     </ul>
                 </div>
-
                 <div className={M.input}>
-                    <div className={M.submit}>
-                        <div>
-                            <textarea ref={newMessageElement} onChange={OnMessageChange}
-                                      value={props.NewMessageText}
-                                      className={M.textArea} rows="3"/>
-                        </div>
-                        <div>
-                            <button onClick={AddMessage} type="submit" className={M.btn}>
-                                Send!
-                            </button>
-                        </div>
-                    </div>
+                    <AddMessageFormRedux onSubmit={AddMessage}/>
                 </div>
             </div>
         </section>
     )
 }
+
+
+const AddMessageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit} className={M.submit}>
+            <div>
+                <Field component={TextArea}
+                       name="newMessageElement"
+                       className={M.textArea}
+                       validate={[required]}
+                />
+            </div>
+
+            <div>
+                <button>
+                    Send!
+                </button>
+            </div>
+        </form>
+    )
+}
+
+const AddMessageFormRedux = reduxForm({form: " DialogAddMessageForm"})(AddMessageForm)
+
 
 export default Messages

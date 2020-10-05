@@ -7,9 +7,6 @@ function Post(props) {
             <div className={P.text}>
                 {props.text}
             </div>
-            <div className={P.emoji}>
-                <img src={props.img} alt={props.id}/>
-            </div>
         </div>
     )
 }

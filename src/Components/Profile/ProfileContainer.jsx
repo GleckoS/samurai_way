@@ -1,10 +1,8 @@
 import React, {Component} from "react"
 import {
     addPost,
-    OnPostChange,
-    profileStatusThunkCreator,
+    updateProfileStatusThunkCreator,
     profileThunkCreator,
-    updateProfileStatusThunkCreator
 } from "../../redux/ProfileReducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
@@ -18,7 +16,7 @@ class ProfileAPIContainer extends Component {
     componentDidMount() {
         let userID = this.props.match.params.userID
         this.props.profileThunkCreator(userID)
-        this.props.profileStatusThunkCreator(userID)
+        this.props.updateProfileStatusThunkCreator(userID)
     }
 
 
@@ -32,14 +30,13 @@ class ProfileAPIContainer extends Component {
 let mapStateToProps = (state) => {
     return {
         Posts: state.Profile.Posts,
-        NewPostText: state.Profile.NewPostText,
         Profile: state.Profile.profileInfo,
         ProfileStatus: state.Profile.profileStatus,
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {profileThunkCreator, profileStatusThunkCreator, updateProfileStatusThunkCreator, OnPostChange, addPost}),
+    connect(mapStateToProps, {profileThunkCreator, updateProfileStatusThunkCreator, addPost}),
     withRouter,
     withAuthRedirect
 )(ProfileAPIContainer)

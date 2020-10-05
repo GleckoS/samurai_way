@@ -1,21 +1,17 @@
 .main{
     grid-column: 4/7;
-    padding-left: 0px;
-    border-right: 1px solid #224b7a;
-    border-left: 1px solid #224b7a;
+    padding-left: 0;
 }
 .wrapper{
     padding: 10px;
     position: relative;
 }
 .input{
-    position: absolute;
-    top: 352px;
-    bottom: auto;
+
 }
 .input input{
     background-color: white;
 }
 .messages ul{
-    padding-left: 0px;
+    padding-left: 0;
 }
