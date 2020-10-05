@@ -39,7 +39,6 @@ const AddMessageForm = (props) => {
             <div>
                 <Field component={TextArea}
                        name="newMessageElement"
-                       className={M.textArea}
                        validate={[required]}
                 />
             </div>
